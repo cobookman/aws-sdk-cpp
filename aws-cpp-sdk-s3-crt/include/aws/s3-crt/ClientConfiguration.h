@@ -73,6 +73,9 @@ namespace Aws
             /* Throughput target in Gbps that we are trying to reach. Normally it's the NIC's throughput */
             double throughputTargetGbps;
 
+            /* If set, sends traffic through the specified Network interface, (e.g. "eth0", or "en0") */
+            Aws::String interface;
+
             /* Callback and associated user data for when the client has completed its shutdown process. */
             std::function<void(void*)> clientShutdownCallback;
             void *shutdownCallbackUserData;

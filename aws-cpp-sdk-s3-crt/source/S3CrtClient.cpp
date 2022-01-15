@@ -241,6 +241,7 @@ void S3CrtClient::init(const S3Crt::ClientConfiguration& config, const Aws::Auth
   }
 
   s3CrtConfig.tls_mode = config.scheme == Aws::Http::Scheme::HTTPS ? AWS_MR_TLS_ENABLED : AWS_MR_TLS_DISABLED;
+  s3CrtConfig.interface = config.interface.c_str();
   s3CrtConfig.throughput_target_gbps = config.throughputTargetGbps;
   m_clientShutdownSem = Aws::MakeShared<Threading::Semaphore>(ALLOCATION_TAG, 0, 1);
   m_wrappedData.data = config.shutdownCallbackUserData;
