@@ -201,6 +201,7 @@ void S3CrtClient::init(const S3Crt::ClientConfiguration& config, const Aws::Auth
   aws_s3_client_config s3CrtConfig;
   memset(&s3CrtConfig, 0, sizeof(s3CrtConfig));
   s3CrtConfig.region = Aws::Crt::ByteCursorFromCString(config.region.c_str());
+  s3CrtConfig.interface = Aws::Crt::ByteCursorFromCString(config.interface.c_str());
   Aws::Crt::Io::ClientBootstrap* clientBootstrap = config.clientBootstrap ? config.clientBootstrap.get() : Aws::GetDefaultClientBootstrap();
   s3CrtConfig.client_bootstrap = clientBootstrap->GetUnderlyingHandle();
 
@@ -241,7 +242,6 @@ void S3CrtClient::init(const S3Crt::ClientConfiguration& config, const Aws::Auth
   }
 
   s3CrtConfig.tls_mode = config.scheme == Aws::Http::Scheme::HTTPS ? AWS_MR_TLS_ENABLED : AWS_MR_TLS_DISABLED;
-  s3CrtConfig.interface = config.interface.c_str();
   s3CrtConfig.throughput_target_gbps = config.throughputTargetGbps;
   m_clientShutdownSem = Aws::MakeShared<Threading::Semaphore>(ALLOCATION_TAG, 0, 1);
   m_wrappedData.data = config.shutdownCallbackUserData;

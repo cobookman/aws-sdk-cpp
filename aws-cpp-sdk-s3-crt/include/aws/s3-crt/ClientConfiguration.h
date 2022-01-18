@@ -27,6 +27,7 @@ namespace Aws
                 partSize(5 * 1024 * 1024),
                 scheme(Aws::Http::Scheme::HTTPS),
                 throughputTargetGbps(2.0),
+                interface(""),
                 shutdownCallbackUserData(nullptr)
             {};
 
